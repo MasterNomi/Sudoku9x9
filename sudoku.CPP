@@ -2,15 +2,25 @@
 #include <conio.h>
 
 #define SIZE 9
-int grid[SIZE][SIZE] = { {0, 0, 0, 0, 0, 0, 0, 0, 0},
-			 {0, 0, 0, 0, 0, 0, 0, 0, 0},
+int grid[SIZE][SIZE] = { {0, 0, 0, 5, 0, 0, 0, 0, 0},
+						 {1, 0, 4, 0, 0, 0, 0, 0, 0},
+                         {0, 5, 0, 0, 0, 0, 0, 0, 0},
                          {0, 0, 0, 0, 0, 0, 0, 0, 0},
                          {0, 0, 0, 0, 0, 0, 0, 0, 0},
                          {0, 0, 0, 0, 0, 0, 0, 0, 0},
                          {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                         {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                         {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                         {0, 0, 0, 0, 0, 0, 0, 3, 0},
                          {0, 0, 0, 0, 0, 0, 0, 0, 0}};
+
+bool permanentGrid[SIZE][SIZE] = {  {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                    {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                    {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                    {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                    {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                    {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                    {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                    {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                    {0, 0, 0, 0, 0, 0, 0, 0, 0} };
 
 /*
 * This Function Displays the sudoku grid on the console 
@@ -118,11 +128,9 @@ bool solver(int i, int j, int num)
               return 1; // This means that all next boxes have been successfully assigned
       }      
   }
-     /*
-     * TODO: Add a mechanism that will say that you cannot change if
-     *       current element is permanently assigned by user before hand
-     */
-  grid[i][j] = 0; // A successful combination was not found reset it 
+  
+  if (permanentGrid[i][j] == 0) // if current element is changeable
+	grid[i][j] = 0; // A successful combination was not found reset it 
   return 0; // send failure back
 }
 
